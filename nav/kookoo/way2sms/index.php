@@ -14,7 +14,7 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    $username   =   "Vipul Nayyar";
+    $username   =   "9968371143";
     $password   =   "hack123";
     $receiver   =   "9968371143";
     $output     =   "hi vipul";
