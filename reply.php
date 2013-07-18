@@ -35,6 +35,8 @@ foreach ($jsonIterator as $key => $val)
         if ($key ==  "html_instructions")
             {
                 $val =str_replace("\n","",$val);
+                $val =str_replace("<b>","",$val);
+                $val =str_replace("</b>","",$val);
 	        	echo $val."<br>";
             }
         }
