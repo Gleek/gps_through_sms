@@ -8,9 +8,9 @@ if (mysqli_connect_errno($con)){
 require "simple_html_dom.php";
 $market=array("Lajpat-Nagar","Chandni-Chowk");
 $keyword=array("Cloth-shops","restaurant",);
-//$html = file_get_html('http://www.justdial.com/Delhi-NCR/'.$keyword[0].'%3Cnear%3E-'.$market[0]);
-//echo $html;
-echo 'http://www.justdial.com/Delhi-NCR/'.$keyword[0].'%3Cnear%3E-'.$market[0];
+$html = file_get_html('http://www.justdial.com/Delhi-NCR/'.$keyword[0].'%3Cnear%3E-'.$market[0]);
+echo $html;
+//echo 'http://www.justdial.com/Delhi-NCR/'.$keyword[0].'%3Cnear%3E-'.$market[0];
 //mysqli_close($con);
 
 
