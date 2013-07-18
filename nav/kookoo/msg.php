@@ -4,7 +4,7 @@ include "lib/config.inc.php";
 //phpinfo();
 $con=$dbhandle;
 
-if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSMS"){
+if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 
 echo "in";
 	$message=$_REQUEST['message'];
