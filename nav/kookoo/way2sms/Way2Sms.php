@@ -1,5 +1,5 @@
 <?php
- 
+
 /*
  *
  *  Author Name     : Thangaraj Mariappan
@@ -14,22 +14,22 @@
     include_once 'CurlProcess.php';
 
     class Way2Sms{
-        
+
         var $login;
         var $curl;
         var $token;
         var $autobalancer;
         var $cookieToken;
         var $cookieSendSMS;
-        
+
         public function Way2Sms()
         {
             $this->login        =   FALSE;
-            $this->autobalancer =   1;
+            $this->autobalancer =   4;
             $this->curl         =   new CurlProcess();
             $this->cookieSendSMS=   "12489smssending34908=67547valdsvsikerexzc435457";
         }
-        
+
         public function login($username, $password)
         {
             $post_data  =   "username=$username&password=$password&userLogin=no&button=Login";
@@ -52,7 +52,7 @@
                 return true;
             }
         }
-        
+
         public function send($number,$message)
         {
             if ($this->login) {
@@ -80,7 +80,7 @@
                 }
                 //print_r($post_data);
                 //exit;
-                
+
                 // Dynamic read input from the page
                 preg_match_all('/<input(?=[^>]* name=["\']([^\'"]*)|)(?=[^>]* value=["\']([^\'"]*)|)/',$content,$results);
                 //print_r($results);
@@ -101,7 +101,7 @@
                 }
                 //echo $post_data;
                 //exit;
-                
+
                 // Dynamic read select tag from the page
                 preg_match_all("#<select(?=[^>]* name=[\"']([^'\"]*)|)(\s+[^>]*)?>(.|\n)*?</select>#",$content,$selectResults);
                 if(isset($selectResults[0]) && isset($selectResults[1])) {
@@ -116,7 +116,7 @@
                 //echo $post_data;
                 //exit;
                 //echo htmlentities($content);exit;
-                
+
                 // Dynamically Load js fields
                 preg_match_all("/setAttribute((.|\n)*?);/is",$content,$jsResults);
                 if(isset($jsResults[1])){
@@ -133,9 +133,9 @@
                 }
         				//echo $post_data;
                 //exit;
-                
+
                 // Dynamically get form action url to send sms
-                $regex      =   "/<form.*action=(\"([^\"]*)\"|'([^']*)'|[^>\s]*)([^>]*)?>/is";                
+                $regex      =   "/<form.*action=(\"([^\"]*)\"|'([^']*)'|[^>\s]*)([^>]*)?>/is";
                 preg_match($regex,$content,$match);
 				        if(isset($match[1])) {
   					        $frmAction  =   $match[1];
@@ -175,9 +175,9 @@
                       return false;
                 }
             } else
-                return false;//echo "<h2>Please login to send SMS</h2>";        
+                return false;//echo "<h2>Please login to send SMS</h2>";
         }
-        
+
         public function logout()
         {
             $post_data  =   "1=1";
@@ -189,5 +189,5 @@
                 return false;
         }
     }
-    
+
 ?>
