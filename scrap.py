@@ -3,7 +3,7 @@ from urllib2 import urlopen
 
 import _mysql,MySQLdb
 
-html = urlopen("http://www.justdial.com/Delhi-NCR/fabric-%3Cnear%3E-lagpat-nagar").read()
+html = urlopen("http://www.justdial.com/Delhi-NCR/Restaurants-%3Cnear%3E-Chandni-Chowk").read()
 soup = BeautifulSoup(html, "lxml")
 market="lajpat"
 
