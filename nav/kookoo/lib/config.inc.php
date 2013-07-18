@@ -11,7 +11,7 @@ error_reporting(E_ALL  & ~E_NOTICE & ~E_DEPRECATED);
 $con=mysql_connect("engineerinme.com","root","kgggdkp2692","peerhack");
 if (mysql_connect_errno())
   {
-  echo "Failed to connect to MySQL: " . mysql_connect_error();
+  echo "Failed to connect to MySQL: ";
   die();
   }
 
