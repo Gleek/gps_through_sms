@@ -18,11 +18,11 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	//mysql_error();
 	try{
 	$r->sendSms("hello",$_REQUEST['cid']);
-}catch(Exception $e)
+}catch(Exception $e){
 	echo "error".$e;
 }
 
-
+}
 
 
 mysql_close($con);
