@@ -2,7 +2,7 @@
 
 include "lib/config.inc.php";
 //phpinfo();
-
+$con=$dbhandle;
 
 if(isset($_REQUEST['event']) && $_REQUEST=="NewSMS"){
 
