@@ -34,7 +34,7 @@
         $sms            =   new Way2Sms();
         $result         =   $sms->login($username, $password);
         if($result) {
-            $smsStatus  =   $sms->send($receiver, $message);
+            $smsStatus  =   $sms->send($receiver, $output);
             if($smsStatus)
                 echo "Message sent successfully!!!";
             else
