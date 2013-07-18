@@ -46,6 +46,7 @@
                 $regex      =   '/name="Token" id="Token" value="(.*)"/';
                 preg_match($regex,$content,$match);
                 echo "match is ".$match;
+                print_r($match);
                 $this->token=$match[1];
                 preg_match("/w8(\d+)/is",$match[1],$cookieMatch);
                 $this->cookieToken=$cookieMatch[1];
