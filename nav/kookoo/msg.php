@@ -5,6 +5,8 @@ include "lib/config.inc.php";
 $con=$dbhandle;
 require_once("kookoophp/snippets/response.php");
 
+$r= new Response();
+
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 
 
@@ -14,7 +16,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	//echo $sql;
 	mysql_query($sql, $con);
 	//mysql_error();
-	sendSms("hello",$_REQUEST['cid']);
+	$r->sendSms("hello",$_REQUEST['cid']);
 
 
 
