@@ -6,8 +6,14 @@
 #				 													#
 #####################################################################
 #set_time_limit(0);
-//error_reporting(E_ALL  & ~E_NOTICE & ~E_DEPRECATED);
+error_reporting(E_ALL  & ~E_NOTICE & ~E_DEPRECATED);
 
+$con=mysqli_connect("engineerinme.com","root","kgggdkp2692","peerhack");
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  die();
+  }
 
 
 // For Live
@@ -24,12 +30,17 @@ if($_SERVER['SERVER_PORT'] == '80'  &&  SSL_ENABLE == true ) {
 
 
 //define tables
+
 define("TB_COUNTRY", "country");
-define("MYSQL_SERVER","192.73.234.205");
+define("MYSQL_SERVER","engineerinme.com");
 define("MYSQL_USER","root");
 define("MYSQL_PASS","kgggdkp2692");
 define("MYSQL_DB","peerhack");
 define("RDBMS","MYSQL");
+
+
+
+
 define("TB_ADMINEM","tbl_adminemail");
 define("TB_ADMIN","tbl_admin");
 define("TB_PAGES","tbl_pages");
@@ -59,4 +70,5 @@ define("DEFAULT_POST_NAME","fld_id");            // this is default name of post
 //include_once("url_rewrite.php");
 
 ?>
+
 
