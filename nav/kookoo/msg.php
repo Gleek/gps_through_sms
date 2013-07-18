@@ -1,6 +1,7 @@
 <?php
 
-include "lib/config.inc.php";
+//include "lib/config.inc.php";
+phpinfo();
 
 
 if(isset($_REQUEST['event']) && $_REQUEST=="NewSMS"){
