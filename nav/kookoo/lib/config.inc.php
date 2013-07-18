@@ -2,14 +2,16 @@
 #set_time_limit(0);
 error_reporting(E_ALL  & ~E_NOTICE & ~E_DEPRECATED);
 
-$con=mysqli_connect("engineerinme.com","root","kgggdkp2692","peerhack");
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: ";
-  die();
-  }
-else
-{
-echo "connected";
-}
+$username = "root";
+$password = "kgggdkp2692";
+$hostname = "engineerinme.com";
+
+//connection to the database
+$dbhandle = mysql_connect($hostname, $username, $password)
+  or die("Unable to connect to MySQL");
+echo "Connected to MySQL<br>";
+
+$selected = mysql_select_db("peerhack",$dbhandle)
+  or die("Could not select peerhack db");
+
 ?>

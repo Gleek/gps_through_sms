@@ -1,7 +1,7 @@
 <?php
 
-//include "lib/config.inc.php";
-phpinfo();
+include "lib/config.inc.php";
+//phpinfo();
 
 
 if(isset($_REQUEST['event']) && $_REQUEST=="NewSMS"){
@@ -14,7 +14,7 @@ if(isset($_REQUEST['event']) && $_REQUEST=="NewSMS"){
 
 }
 
-mysqli_close($con);
+mysql_close($con);
 
 
 
