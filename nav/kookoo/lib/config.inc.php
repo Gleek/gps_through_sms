@@ -4,7 +4,7 @@ error_reporting(E_ALL  & ~E_NOTICE & ~E_DEPRECATED);
 
 $username = "root";
 $password = "kgggdkp2692";
-$hostname = "www.engineerinme.com";
+$hostname = "192.73.234.205";
 
 //connection to the database
 $dbhandle = mysql_connect($hostname, $username, $password)
