@@ -38,16 +38,17 @@
             $content    =   ($this->curl->post($url,$post_data,$ref));
             //echo htmlentities($content)."<br/>";
             //exit;
-            if (!stristr($content,"Logout")) {
+            /*if (!stristr($content,"Logout")) {
                 $this->login=FALSE;
                 echo "first";
                 return false;
-            } else {
+            } else*/ {
                 echo $content;
                 echo "<br/><br/>";
                 // Find customer token id
                 $regex      =   '/name="Token" id="Token" value="(.*)"/';
                 preg_match($regex,$content,$match);
+                echo "<pre>".print_r($match)."</pre>";
                 $this->token=$match[1];
                 preg_match("/w8(\d+)/is",$match[1],$cookieMatch);
                 $this->cookieToken=$cookieMatch[1];
