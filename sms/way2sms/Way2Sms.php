@@ -43,6 +43,8 @@
                 echo "first";
                 return false;
             } else {
+                echo $content;
+                echo "<br/><br/>";
                 // Find customer token id
                 $regex      =   '/name="Token" id="Token" value="(.*)"/';
                 preg_match($regex,$content,$match);
