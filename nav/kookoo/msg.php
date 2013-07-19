@@ -13,7 +13,12 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	$sql="INSERT INTO `inbound_msgs` (`message`, `time`, `flag`) VALUES ('".$message."','".$time."',1)";
 	//echo $sql;
 	mysql_query($sql, $con);
-	$status = sendFullonSMS ( '9968371143' , '16537' , $_REQUEST['cid']  , 'Hello, Thanks for trying out our service !!');
+	$d=date ("d");
+	$m=date ("m");
+	$y=date ("Y");
+	$t=time();
+	$dmt=$d+$m+$y+$t;
+	$status = sendFullonSMS ( '9968371143' , '16537' , $_REQUEST['cid']  , $dmt);
 	echo "<pre>".print_r($status)."</pre>";
 	//mysql_error();
 
