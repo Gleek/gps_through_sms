@@ -20,14 +20,14 @@ $jsonIterator = new RecursiveIteratorIterator(
     RecursiveIteratorIterator::SELF_FIRST);
 
 
-
+$omega="";
 foreach ($jsonIterator as $key => $val)
 {
     if(!is_array($val))
     {
         if($key == "status")
         if($val !='OK'){
-            echo $val ;
+            $omega = $omega.$val ;
             die();}
     }
 
@@ -37,10 +37,15 @@ foreach ($jsonIterator as $key => $val)
                 $val =str_replace("\n","",$val);
                 $val =str_replace("<b>","",$val);
                 $val =str_replace("</b>","",$val);
-	        	echo $val."<br>";
+	        	$omega = $omega.$val ;
             }
         }
 }
+
+$url='http://kservices.knowlarity.com/ktts/get?text=<english><rate>70</rate>'.$omega.'</english>';
+header('Location:'.$url);
+
 ?>
+
 
 
