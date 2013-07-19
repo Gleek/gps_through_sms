@@ -24,6 +24,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	$dmt="Current date is ".$d." , month ".$m." & year ".$y.". Here's a random number : ".rand(100,1000);
 	$status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
 	echo "<pre>".print_r($status)."</pre>";
+	echo "status is ".$status."<br/>";
 
 	if($status['result']==1){
 		$result=mysql_query("SELECT id from inbound_msgs ORDER BY entry_time DESC LIMIT 1", $con);
@@ -33,6 +34,8 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 		echo "trying to put 2";
 	}
 	//mysql_error();
+
+	echo "outside";
 
 
 }
