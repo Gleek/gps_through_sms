@@ -25,7 +25,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	$status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
 	echo "<pre>".print_r($status)."</pre>";
 
-	if($status==1){
+	if($status['result']==1){
 		$result=mysql_query("SELECT id from inbound_msgs ORDER BY entry_time DESC LIMIT 1", $con);
 		$row = mysql_fetch_array($result);
 		$sql="UPDATE `inbound_msgs` SET `flag`= 2 WHERE `id` = ".$row['id'];
