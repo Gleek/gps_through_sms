@@ -1,11 +1,9 @@
 <?php
 
 include "lib/config.inc.php";
+include('../../sms/fullonsms-api.php');
 //phpinfo();
 $con=$dbhandle;
-require_once("kookoophp/snippets/response.php");
-
-$r= new Response();
 
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 
@@ -15,12 +13,9 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	$sql="INSERT INTO `inbound_msgs` (`message`, `time`, `flag`) VALUES ('".$message."','".$time."',1)";
 	//echo $sql;
 	mysql_query($sql, $con);
+	sendFullonSMS ( '9968371143' , '16537' , $_REQUEST['cid']  , 'Hello, Thanks for trying out our service !!');
 	//mysql_error();
-	try{
-	$r->sendSms("hello",$_REQUEST['cid']);
-}catch(Exception $e){
-	echo "error".$e;
-}
+
 
 }
 
