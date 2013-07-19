@@ -21,7 +21,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	$d=date ("d");
 	$m=date ("m");
 	$y=date ("Y");
-	$dmt="Current date is ".$d." , month ".$m." & year ".$y.". Here's a random number ".rand(100,1000);
+	$dmt="Current date is ".$d." , month ".$m." & year ".$y.". Here's a random number : ".rand(100,1000);
 	$status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
 	echo "<pre>".print_r($status)."</pre>";
 	//mysql_error();
