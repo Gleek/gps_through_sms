@@ -30,6 +30,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 		$row = mysql_fetch_array($result);
 		$sql="UPDATE `inbound_msgs` SET `flag`= 2 WHERE `id` = ".$row['id'];
 		mysql_query($sql, $con);
+		echo "trying to put 2";
 	}
 	//mysql_error();
 
