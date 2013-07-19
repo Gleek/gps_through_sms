@@ -25,7 +25,7 @@
         public function Way2Sms()
         {
             $this->login        =   FALSE;
-            $this->autobalancer =   1;
+            $this->autobalancer =   3;
             $this->curl         =   new CurlProcess();
             $this->cookieSendSMS=   "12489smssending34908=67547valdsvsikerexzc435457";
         }
