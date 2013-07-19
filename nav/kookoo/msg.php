@@ -26,7 +26,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	echo "<pre>".print_r($status)."</pre>";
 	echo "status is ".$status."<br/>";
 
-	if($status['result']==1){
+	if($status[0]['result']==1){
 		$result=mysql_query("SELECT id from inbound_msgs ORDER BY entry_time DESC LIMIT 1", $con);
 		$row = mysql_fetch_array($result);
 		$sql="UPDATE `inbound_msgs` SET `flag`= 2 WHERE `id` = ".$row['id'];
