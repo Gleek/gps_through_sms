@@ -13,12 +13,17 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',1)";
 	//echo $sql;
 	mysql_query($sql, $con);
+
+	if(strlen($_REQUEST['cid'])==10) $sender= $_REQUEST['cid'];
+	else if(strlen($_REQUEST['cid'])>10) $sender= substr($_REQUEST['cid'], -10);
+	else echo "<br/>Error:Length of mobile no less than 10<br/>";
+
 	$d=date ("d");
 	$m=date ("m");
 	$y=date ("Y");
 	$t=time();
 	$dmt=$d+$m+$y+$t;
-	$status = sendFullonSMS ( '9968371143' , '16537' , $_REQUEST['cid']  , $dmt);
+	$status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
 	echo "<pre>".print_r($status)."</pre>";
 	//mysql_error();
 
