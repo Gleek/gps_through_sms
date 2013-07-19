@@ -22,7 +22,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	$m=date ("m");
 	$y=date ("Y");
 	$t=time();
-	$dmt=$d+$m+$y+$t;
+	$dmt="Current date is ".$d." , month ".$m." , year ".$y." & time ".$t;
 	$status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
 	echo "<pre>".print_r($status)."</pre>";
 	//mysql_error();
