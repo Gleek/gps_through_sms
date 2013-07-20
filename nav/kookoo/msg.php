@@ -123,19 +123,19 @@ function init(){
 
 function break_text(){
 	echo "In break_text : text is ".$text;
-	if(strlen($text)<=160) return array($text);
+	if(strlen($text)<=140) return array($text);
 	$text_container = array();
 
 	for ($i=0; $i < strlen($text) ;) {
-		$j=strpos($text, '\n');
+		$j=strpos($text, "<br/>");
 		$temp=substr($text, $i,$j-$i);
 
 		if(strlen($temp)<=160){
 			array_push($text_container, $temp);
-			$i=$j+1;
+			$i=$j+5;
 		}else{
 			array_push($text_container, substr($temp, $i, 160) );
-			$i=$i + 160;
+			$i=$i + 140;
 		}
 
 	}// end of for loop
