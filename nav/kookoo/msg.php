@@ -56,7 +56,7 @@ function init(){
 	$time=$_REQUEST['time'];
 	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',0)";
 	//echo $sql;
-	mysql_query($sql, $con)
+	mysql_query($sql, $con);
 	send();
 }
 
