@@ -10,7 +10,7 @@ $con=$dbhandle;
 function msgparse($message)
 {
 
-$source="";
+	$source="";
     $destination="";
     $md=substr($message,0,3);
     //echo $md;
@@ -20,7 +20,7 @@ $source="";
         $main=preg_split("/(from:|to:)\s*/", $message);
         $source=urlencode($main[1]);
         $destination=urlencode($main[2]);
-        $url="http://engineerinme.com/hammad/peerhack/replymsg.php?source=".$source."&destination=".$destination;
+        $url="http://peerhack.herokuapp.com/replymsg.php?source=".$source."&destination=".$destination;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -42,7 +42,7 @@ $source="";
             $err  = 'Invalid query: ' . mysql_error() . "\n";
             $err .= 'Whole query: ' . $query;
             die($err);
-}
+		}
         while($row = mysql_fetch_assoc($result))
         {
             $text .= $row['text']." ";
@@ -55,11 +55,11 @@ $source="";
     }
     echo $text;
 
-        $parts = str_split($text, 139);
-        /*echo "<pre>";
-        print_r($parts);
-        echo "</pre>";*/
-        echo "<br>sending ".count($parts)." messages<br>";
+    $parts = str_split($text, 139);
+    /*echo "<pre>";
+    print_r($parts);
+    echo "</pre>";*/
+    echo "<br>sending ".count($parts)." messages<br>";
     return $parts;
 
 
@@ -73,6 +73,27 @@ function check_service(){
 	else die();
 }
 
+function break_text(){
+	echo "In break_text : text is ".$text;
+	if(strlen($text)<=140) return array($text);
+	$text_container = array();
+
+	for ($i=0; $i < strlen($text) ;) {
+		$j=strpos($text, "<br>");
+		$temp=substr($text, $i,$j-$i);
+
+		if(strlen($temp)<=160){
+			array_push($text_container, $temp);
+			$i=$j+4;
+		}else{
+			array_push($text_container, substr($temp, $i, 160) );
+			$i=$i + 140;
+		}
+
+	}// end of for loop
+
+	return $text_container;
+}// break_text ends
 function break_nav(){
 	//$message= $_REQUEST['message'];
  	$message="nav from: jamia millia islamia to: noida";
@@ -118,32 +139,11 @@ function init(){
 	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',0)";
 	//echo $sql;
 	mysql_query($sql, $con);
-	send();
-}
 
-function break_text(){
-	echo "In break_text : text is ".$text;
-	if(strlen($text)<=140) return array($text);
-	$text_container = array();
 
-	for ($i=0; $i < strlen($text) ;) {
-		$j=strpos($text, "<br>");
-		$temp=substr($text, $i,$j-$i);
 
-		if(strlen($temp)<=160){
-			array_push($text_container, $temp);
-			$i=$j+4;
-		}else{
-			array_push($text_container, substr($temp, $i, 160) );
-			$i=$i + 140;
-		}
 
-	}// end of for loop
-
-	return $text_container;
-}// break_text ends
-
-function send(){
+	//function send
 
 	if(strlen($_REQUEST['cid'])==10) $sender= $_REQUEST['cid'];
 	else if(strlen($_REQUEST['cid'])>10) $sender= substr($_REQUEST['cid'], -10);
@@ -152,15 +152,10 @@ function send(){
 		die();
 	}
 
-	$text_send=break_text();
-	print_r($text_send);
+	//$text_send=break_text();
+	//print_r($text_send);
 
 
-	/*$d=date ("d");
-	$m=date ("m");
-	$y=date ("Y");
-
-	$dmt="Current date is ".$d." , month ".$m." & year ".$y.". Here's a random number : ".rand(100,1000);*/
 
 
 	$parts=msgparse($message);
@@ -176,35 +171,27 @@ function send(){
 	       	$sql="UPDATE `inbound_msgs` SET `flag`= 2 WHERE `id` = ".$row['id'];
     		mysql_query($sql, $con);
     		echo "trying to put 2";
-	}
-	//mysql_error();
+		}
+		//mysql_error();
     }
 	echo "outside";
 
 
-}
+
 
 
 mysql_close($con);
 
-
-
-	$dmt="Current date is ".$d." , month ".$m." & year ".$y.". Here's a random number : ".rand(100,1000);
-	/*$status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
-
-	if($status[0]['result']==1){
-		$result=mysql_query("SELECT id from inbound_msgs ORDER BY entry_time DESC LIMIT 1", $con);
-		$row = mysql_fetch_array($result);
-		$sql="UPDATE `inbound_msgs` SET `flag`= 1 WHERE `id` = ".$row['id'];
-		mysql_query($sql, $con);
-	}*/
-	echo "In send text is ".$text;
+echo "In send text is ".$text;
 }
 
 
-$text=check_service();
 
-
+$message="nav from:jamia millia islamia new delhi india to: noida";
+foreach (msgparse($message) as $fi) {
+	echo $fi."<br>";
+}
+//$text=check_service();
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	init();
 }
