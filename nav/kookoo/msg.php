@@ -15,8 +15,8 @@ $con=$dbhandle;
         $main1=explode("from:",$message);
         $main2=explode("to:",$main1[1]);
         //print_r($main1);
-        $source=$main2[0];
-        $destination=$main2[1];
+        $source=urlencode($main2[0]);
+        $destination=urlencode($main2[1]);
     }
 
     echo "end of if";
