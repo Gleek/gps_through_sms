@@ -11,7 +11,6 @@ $con=$dbhandle;
     $destination="";
     if(substr($message,0,3)=="nav")
     {
-        echo "entered";
         $main1=explode("from:",$message);
         $main2=explode("to:",$main1[1]);
         //print_r($main1);
@@ -19,7 +18,6 @@ $con=$dbhandle;
         $destination=urlencode($main2[1]);
     }
 
-    echo "end of if";
     $url="http://engineerinme.com/hammad/peerhack/replymsg.php?source=".$source."&destination=".$destination;
     echo "url is ".$url;
     $ch = curl_init();
@@ -28,7 +26,7 @@ $con=$dbhandle;
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
     $text = curl_exec($ch);
     curl_close($ch);
-    echo $text;
+    echo "text is ".$text;
 }
 
 break_msg("abc");
