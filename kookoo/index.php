@@ -42,12 +42,14 @@ foreach ($jsonIterator as $key => $val)
                 break ;
             else
                 $i =$i + 1 ;
-                $val =str_replace("\n","",$val);
-                $val =str_replace("<b>","",$val);
-                $val =str_replace("</div>","",$val);
-                $val =str_replace('<div style="font-size:0.9em">',"",$val);
-                $val =str_replace("</b>","",$val);
-                $val =str_replace("&nbsp;","",$val);
+                //echo $val . "<br/>";
+                $val =str_replace("\n"," ",$val);
+                $val =str_replace("<b>"," ",$val);
+                $val =str_replace("</div>"," ",$val);
+                $val =str_replace('<div style="font-size:0.9em">'," ",$val);
+                $val =str_replace("</b>"," ",$val);
+                $val =str_replace("&nbsp;"," ",$val);
+                $val = $val . " . " ;
                 $r->addPlayText($val);
             }
         }
@@ -119,9 +121,9 @@ if($_REQUEST['event']=="NewCall" ||  $_SESSION['error']==1) // Receiving New Cal
         $r->addPlayText( "Error in Query . Try again ." ) ;
        }
     
-     $q="UPDATE `inbound_msgs` SET `flag`=2  WHERE `sender` = '91".$_REQUEST['cid']."'   " ;
+    // $q="UPDATE `inbound_msgs` SET `flag`=2  WHERE `sender` = '91".$_REQUEST['cid']."'   " ;
      $v=2;
-     $result = mysql_query($q);
+     //$result = mysql_query($q);
      break;
     }
     if ($v == 1 )
@@ -137,5 +139,6 @@ if($_REQUEST['event']=="NewCall" ||  $_SESSION['error']==1) // Receiving New Cal
 
 }
 ?>
+
 
 

@@ -34,11 +34,14 @@ foreach ($jsonIterator as $key => $val)
     if(!is_array($val)){
         if ($key ==  "html_instructions")
             {
-                $val =str_replace("\n","",$val);
-                $val =str_replace("<b>","",$val);
-                $val =str_replace("</b>","",$val);
-                $val=str_replace('<div style="font-size:0.9em">',"<br>",$val);
-                $val=str_replace('</div>',"<br>",$val);
+               
+                $val =str_replace("\n"," ",$val);
+                $val =str_replace("<b>"," ",$val);
+                $val =str_replace("</div>"," ",$val);
+                $val =str_replace('<div style="font-size:0.9em">'," ",$val);
+                $val =str_replace("</b>"," ",$val);
+                $val =str_replace("&nbsp;"," ",$val);
+                $val = $val . " . " ;
                 
 	        	$omega = $omega.$val ;
             }
@@ -49,6 +52,7 @@ foreach ($jsonIterator as $key => $val)
 echo $omega;
 
 ?>
+
 
 
 
