@@ -188,9 +188,9 @@ echo "In send text is ".$text;
 
 
 $message="nav from:jamia millia islamia new delhi india to: noida";
-foreach (msgparse($message) as $fi) {
+/*foreach (msgparse($message) as $fi) {
 	echo $fi."<br>";
-}
+}*/
 //$text=check_service();
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	init();
