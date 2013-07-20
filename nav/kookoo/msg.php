@@ -5,8 +5,9 @@ include('../../sms/fullonsms-api.php');
 //phpinfo();
 $con=$dbhandle;
 
-$message="nav from: jamia millia islamia to: noida";
-$source="";
+ function break_msg($message){
+ 	$message="nav from: jamia millia islamia to: noida";
+	$source="";
     $destination="";
     if(substr($msg,0,3)=="nav")
     {
@@ -25,10 +26,12 @@ $source="";
     $text = curl_exec($ch);
     curl_close($ch);
     echo $text;
+ }
+
+break_msg("abc");
 
 
-
-if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms" && 1==2){
+if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 
 
 	$message=$_REQUEST['message'];
@@ -49,7 +52,7 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms" && 1==2){
         $source=url_encode($main[0]);
         $destination=url_encode($main[1]);
     }
-    
+
     $url="http://engineerinme.com/hammad/peerhack/replymsg.php?source=".$source."&destination=".$destination;
 
     $ch = curl_init();
