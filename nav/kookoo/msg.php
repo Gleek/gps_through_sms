@@ -12,11 +12,11 @@ $con=$dbhandle;
     if(substr($message,0,3)=="nav")
     {
         echo "entered";
-        $main=explode("from:",$message);
-        $main=explode("to:",$main);
+        $main1=explode("from:",$message);
+        $main2=explode("to:",$main1);
         print_r($main);
-        $source=url_encode($main[0]);
-        $destination=url_encode($main[1]);
+        $source=$main2[0];
+        $destination=$main2[1];
     }
 
     echo "end of if";
@@ -29,7 +29,7 @@ $con=$dbhandle;
     $text = curl_exec($ch);
     curl_close($ch);
     echo $text;
- }
+}
 
 break_msg("abc");
 
