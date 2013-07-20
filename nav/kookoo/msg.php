@@ -9,7 +9,7 @@ $con=$dbhandle;
  	$message="nav from: jamia millia islamia to: noida";
 	$source="";
     $destination="";
-    if(substr($msg,0,3)=="nav")
+    if(substr($message,0,3)=="nav")
     {
         echo "entered";
         $main=explode($message,"from:");
