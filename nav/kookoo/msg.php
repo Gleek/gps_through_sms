@@ -55,12 +55,12 @@ $source="";
     }
     echo $text;
 
-        $parts = str_split($text, 149);
+        $parts = str_split($text, 139);
         /*echo "<pre>";
         print_r($parts);
         echo "</pre>";*/
         echo "<br>sending ".count($parts)." messages<br>";
-    return $parts
+    return $parts;
 
 
 }
@@ -163,7 +163,7 @@ function send(){
 	print_r($text_send);
 
 
-	$d=date ("d");
+	/*$d=date ("d");
 	$m=date ("m");
 	$y=date ("Y");
 
