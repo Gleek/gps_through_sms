@@ -86,9 +86,13 @@ if($_REQUEST['event']=="NewCall" ||  $_SESSION['error']==1) // Receiving New Cal
     $r->addPlayText("  Your last  query is  ") ;
     while ($row = mysql_fetch_assoc($result)) {
        
-       $service = explode(" ",$row['message']);
-       if ($service[0] == 'search' )
+       
+       $md=substr($row['message'],0,3);
+       if ($md == 'loc' )
        {
+             $service=preg_split("/(in:|type:)\s*/", $row['message']);
+             
+             
              $r->addPlayText("Search for shops ");
              $searchq= " SELECT * FROM  `market` WHERE  `market` LIKE  '%".trim($service[1]," ")."%' AND  `keyword` LIKE  '%".trim($service[2]," ")."%' LIMIT 0, 3";
              //echo $searchq ;
@@ -109,8 +113,10 @@ if($_REQUEST['event']=="NewCall" ||  $_SESSION['error']==1) // Receiving New Cal
 
        }
 
-      elseif ($service[0] == 'nav' )
+      elseif ($md == 'nav' )
        {
+
+             $service=preg_split("/(from:|to:)\s*/", $row['message']);
              $r->addPlayText("Navigation From ".$service[1]." To ".$service[2].".");
              
              nav($service[1],$service[2],$r);
@@ -121,9 +127,9 @@ if($_REQUEST['event']=="NewCall" ||  $_SESSION['error']==1) // Receiving New Cal
         $r->addPlayText( "Error in Query . Try again ." ) ;
        }
     
-    // $q="UPDATE `inbound_msgs` SET `flag`=2  WHERE `sender` = '91".$_REQUEST['cid']."'   " ;
+     $q="UPDATE `inbound_msgs` SET `flag`=2  WHERE `sender` = '91".$_REQUEST['cid']."'   " ;
      $v=2;
-     //$result = mysql_query($q);
+     $result = mysql_query($q);
      break;
     }
     if ($v == 1 )

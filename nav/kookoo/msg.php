@@ -68,13 +68,14 @@ function msgparse($message,$con)
 
         //$query="SELECT text FROM market WHERE market='$in' AND keyword ='$type' LIMIT 0,5";
         //print_r($main);
-        $query ="SELECT * FROM  `market` WHERE  `market` LIKE  '%".trim($main[1]," ")."%' AND  `keyword` LIKE  '%".$main[2]."%' LIMIT 0 ,3";
-        //echo $query ;
+        $query ="SELECT * FROM  `market` WHERE  `market` LIKE  '%".trim($main[1]," ")."%' AND  `keyword` LIKE  '%".trim($main[2]," ")."%' LIMIT 0 ,3";
+
         $result=mysql_query($query,$con);
         if (!$result) {
             $err  = 'Invalid query: ' . mysql_error() . "\n";
             $err .= 'Whole query: ' . $query;
-            die($err);
+            bug($err);
+            die();
 		}
 		$ret = array();
 		$i =0;
@@ -129,45 +130,6 @@ function break_text(){
 
 	return $text_container;
 }// break_text ends
-function break_nav(){
-	//$message= $_REQUEST['message'];
- 	$message="nav from: jamia millia islamia to: noida";
-	$source="";
-    $destination="";
-
-    $main1=explode("from:",$message);
-    $main2=explode("to:",$main1[1]);
-    //print_r($main1);
-    $source=urlencode($main2[0]);
-    $destination=urlencode($main2[1]);
-
-
-    $url="http://engineerinme.com/hammad/peerhack/replymsg.php?source=".$source."&destination=".$destination;
-    //echo "url is ".$url;
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-    $text = curl_exec($ch);
-    curl_close($ch);
-    echo "text is ".$text."<br/><br/>";
-    return $text;
-}
-
-function break_search(){
-
-
-	//$message= $_REQUEST['message'];
- 	$message="nav from: jamia millia islamia to: noida";
-	$query="";
-    $main1=explode("search:",$message);
-    $query= $main[1];
-
-
-    $text="sample";
-    return $text;
-}
-
 function init(){
 	$message=$_REQUEST['message'];
 	$time=$_REQUEST['time'];
@@ -193,7 +155,7 @@ function init(){
 
 
 
-	$parts=msgparse($message);
+	$parts=msgparse($message,$con);
 	foreach ($parts as $dmt)
     {
 	   $status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
@@ -221,10 +183,10 @@ echo "In send text is ".$text;
 }
 
 
-
+/*
 $message="nav from:lajpat to:gurgaon";
 bug(msgparse($message,$con));
-
+*/
 
 
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
