@@ -61,6 +61,7 @@ function init(){
 }
 
 function break_text(){
+	echo "In break_text : text is ".$text;
 	if(strlen($text)<=160) return array($text);
 	$text_container = array();
 
