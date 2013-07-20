@@ -119,13 +119,10 @@ if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 function init(){
 	$message=$_REQUEST['message'];
 	$time=$_REQUEST['time'];
-	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',1)";
+	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',0)";
 	//echo $sql;
-	if(mysql_query($sql, $con)==true) send();
-	else{
-		echo "Error in init()";
-		die();
-	}
+	mysql_query($sql, $con);
+	send();
 }
 
 function break_text(){
@@ -204,7 +201,7 @@ mysql_close($con);
 	if($status[0]['result']==1){
 		$result=mysql_query("SELECT id from inbound_msgs ORDER BY entry_time DESC LIMIT 1", $con);
 		$row = mysql_fetch_array($result);
-		$sql="UPDATE `inbound_msgs` SET `flag`= 2 WHERE `id` = ".$row['id'];
+		$sql="UPDATE `inbound_msgs` SET `flag`= 1 WHERE `id` = ".$row['id'];
 		mysql_query($sql, $con);
 	}*/
 	echo "In send text is ".$text;
