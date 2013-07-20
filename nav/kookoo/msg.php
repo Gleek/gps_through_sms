@@ -34,7 +34,7 @@ function break_nav(){
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
     $text = curl_exec($ch);
     curl_close($ch);
-    //echo "text is ".$text;
+    echo "text is ".$text."<br/><br/>";
     return $text;
 }
 
