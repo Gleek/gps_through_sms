@@ -127,12 +127,12 @@ function break_text(){
 	$text_container = array();
 
 	for ($i=0; $i < strlen($text) ;) {
-		$j=strpos($text, "<br/>");
+		$j=strpos($text, "<br>");
 		$temp=substr($text, $i,$j-$i);
 
 		if(strlen($temp)<=160){
 			array_push($text_container, $temp);
-			$i=$j+5;
+			$i=$j+4;
 		}else{
 			array_push($text_container, substr($temp, $i, 160) );
 			$i=$i + 140;
