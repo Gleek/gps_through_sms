@@ -12,8 +12,8 @@ $con=$dbhandle;
     if(substr($message,0,3)=="nav")
     {
         echo "entered";
-        $main=explode($message,"from:");
-        $main=explode($main,"to:");
+        $main=explode("from:",$message);
+        $main=explode("to:"$main);
         print_r($main);
         $source=url_encode($main[0]);
         $destination=url_encode($main[1]);
