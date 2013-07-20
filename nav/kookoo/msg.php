@@ -1,5 +1,11 @@
 
 <?php
+function bug($e)
+{
+    echo "<pre>";
+    print_r($e);
+    echo "</pre>";
+}
 
 include "lib/config.inc.php";
 include('../../sms/fullonsms-api.php');
@@ -7,9 +13,8 @@ include('../../sms/fullonsms-api.php');
 $con=$dbhandle;
 
 
-function msgparse($message)
+function msgparse($message,$con)
 {
-
 	$source="";
     $destination="";
     $md=substr($message,0,3);
@@ -20,7 +25,7 @@ function msgparse($message)
         $main=preg_split("/(from:|to:)\s*/", $message);
         $source=urlencode($main[1]);
         $destination=urlencode($main[2]);
-        $url="http://peerhack.herokuapp.com/replymsg.php?source=".$source."&destination=".$destination;
+        $url="http://192.73.234.205/hammad/peerhack/replymsg.php?source=".$source."&destination=".$destination;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -28,7 +33,32 @@ function msgparse($message)
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
         $text = curl_exec($ch);
         curl_close($ch);
-        //echo $text;
+        
+        $arr = array() ;
+        $arr =explode ( " " , $text);
+        $i =0 ;
+        $ret =array();
+        $count =0 ;
+        while ( 1 )
+        {
+        if ($count > count($arr) )
+                break;
+            $str="";
+            while (strlen($str) < 139 )
+            {
+                $str= $str." ".$arr[$count] ;
+                $count =$count + 1  ;
+            }$count =$count - 1 ;
+            //bug($count . " ". count($arr));
+            
+            
+            $ret[$i]=$str;$i=$i+1;
+        }
+
+          //$parts = str_split($text, 139);
+          //bug($text);
+          //bug( "<br>sending ".$i." messages<br>" );
+         
     }
     else if($md =="loc")
     {
@@ -36,16 +66,25 @@ function msgparse($message)
         $in=$main[1];
         $type=$main[2];
 
-        $query="SELECT text FROM market WHERE market='$in' AND keyword ='$type' LIMIT 0,5";
+        //$query="SELECT text FROM market WHERE market='$in' AND keyword ='$type' LIMIT 0,5";
+        //print_r($main);
+        $query ="SELECT * FROM  `market` WHERE  `market` LIKE  '%".trim($main[1]," ")."%' AND  `keyword` LIKE  '%".$main[2]."%' LIMIT 0 ,3";
+        //echo $query ;
         $result=mysql_query($query,$con);
         if (!$result) {
             $err  = 'Invalid query: ' . mysql_error() . "\n";
             $err .= 'Whole query: ' . $query;
             die($err);
 		}
+		$ret = array();
+		$i =0;
         while($row = mysql_fetch_assoc($result))
         {
+            //print_r($row);
+            $parts =str_split($row['text'],139);
+            $ret[$i] =$parts[0];
             $text .= $row['text']." ";
+            $i =$i+1;
         }
 
     }
@@ -53,14 +92,10 @@ function msgparse($message)
     {
         $text="Error! Example: 'nav from:lakshmi nagar new delhi india to:lajpat nagar new delhi india' or 'loc in:lajpat type:fabric'";
     }
-    echo $text;
+    //echo $text;
 
-    $parts = str_split($text, 139);
-    /*echo "<pre>";
-    print_r($parts);
-    echo "</pre>";*/
-    echo "<br>sending ".count($parts)." messages<br>";
-    return $parts;
+  
+    return $ret;
 
 
 }
@@ -187,17 +222,18 @@ echo "In send text is ".$text;
 
 
 
-$message="nav from:jamia millia islamia new delhi india to: noida";
-/*foreach (msgparse($message) as $fi) {
-	echo $fi."<br>";
-}*/
-//$text=check_service();
+$message="nav from:lajpat to:gurgaon";
+bug(msgparse($message,$con));
+
+
+
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	init();
 }
 
 
 ?>
+
 
 
 
