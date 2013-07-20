@@ -6,9 +6,11 @@ include('../../sms/fullonsms-api.php');
 $con=$dbhandle;
 
 function check_service(){
+	//$message= $_REQUEST['message'];
 	$message="nav from: jamia millia islamia to: noida";
-	if(substr($message,0,3)=="nav") break_nav();
-	else if(substr($message,0,6)=="search") break_search();
+	if(substr($message,0,3)=="nav") return break_nav();
+	else if(substr($message,0,6)=="search") return break_search();
+	else die();
 }
 
 function break_nav(){
@@ -45,19 +47,23 @@ function break_search(){
     $main1=explode("search:",$message);
     $query= $main[1];
 
+    $text="sample";
+    return $text;
 }
 
-function init(){
+function init($text){
 	$message=$_REQUEST['message'];
 	$time=$_REQUEST['time'];
 	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',1)";
 	//echo $sql;
-	if(mysql_query($sql, $con)==true) send();
-	else
+	if(mysql_query($sql, $con)==true) send($text);
+	else{
 		echo "Error in init()";
+		die();
+	}
 }
 
-function send(){
+function send($text){
 
 	if(strlen($_REQUEST['cid'])==10) $sender= $_REQUEST['cid'];
 	else if(strlen($_REQUEST['cid'])>10) $sender= substr($_REQUEST['cid'], -10);
@@ -79,10 +85,10 @@ function send(){
 }
 
 
-$text=break_nav();
+$text=check_service();
 
-if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms")
-	init();
-
+if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
+	init($text);
+}
 
 ?>
