@@ -19,8 +19,9 @@ $con=$dbhandle;
         $destination=url_encode($main[1]);
     }
 
+    echo "end of if";
     $url="http://engineerinme.com/hammad/peerhack/replymsg.php?source=".$source."&destination=".$destination;
-    echo $url;
+    echo "url is ".$url;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
