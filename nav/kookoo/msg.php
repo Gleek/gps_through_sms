@@ -13,7 +13,7 @@ $con=$dbhandle;
     {
         echo "entered";
         $main=explode("from:",$message);
-        $main=explode("to:"$main);
+        $main=explode("to:",$main);
         print_r($main);
         $source=url_encode($main[0]);
         $destination=url_encode($main[1]);
