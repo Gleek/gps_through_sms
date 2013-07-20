@@ -6,7 +6,7 @@ include('../../sms/fullonsms-api.php');
 //phpinfo();
 $con=$dbhandle;
 
-<<<<<<< HEAD
+
 function msgparse($message)
 {
 
@@ -16,7 +16,7 @@ $source="";
     //echo $md;
     if($md=="nav")
     {
-        
+
         $main=preg_split("/(from:|to:)\s*/", $message);
         $source=urlencode($main[1]);
         $destination=urlencode($main[2]);
@@ -54,7 +54,7 @@ $source="";
         $text="Error! Example: 'nav from:lakshmi nagar new delhi india to:lajpat nagar new delhi india' or 'loc in:lajpat type:fabric'";
     }
     echo $text;
-    
+
         $parts = str_split($text, 149);
         /*echo "<pre>";
         print_r($parts);
@@ -62,9 +62,9 @@ $source="";
         echo "<br>sending ".count($parts)." messages<br>";
     return $parts
 
-    
+
 }
-=======
+
 function check_service(){
 	//$message= $_REQUEST['message'];
 	$message="nav from: jamia millia islamia to: noida";
@@ -99,18 +99,18 @@ function break_nav(){
 }
 
 function break_search(){
->>>>>>> 3a731cf91164ac958454e2fec012ed9b3037417e
+
 
 	//$message= $_REQUEST['message'];
  	$message="nav from: jamia millia islamia to: noida";
 	$query="";
 
-<<<<<<< HEAD
+
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
-=======
+
     $main1=explode("search:",$message);
     $query= $main[1];
->>>>>>> 3a731cf91164ac958454e2fec012ed9b3037417e
+
 
     $text="sample";
     return $text;
@@ -151,9 +151,9 @@ function send(){
 
 	if(strlen($_REQUEST['cid'])==10) $sender= $_REQUEST['cid'];
 	else if(strlen($_REQUEST['cid'])>10) $sender= substr($_REQUEST['cid'], -10);
-<<<<<<< HEAD
+
 	else echo "<br/>Error:Length of mobile no less than 10<br/>";
-=======
+
 	else {
 		echo "<br/>Error:Length of mobile no less than 10<br/>";
 		die();
@@ -161,15 +161,15 @@ function send(){
 
 	$text_send=break_text();
 	print_r($text_send);
->>>>>>> 3a731cf91164ac958454e2fec012ed9b3037417e
+
 
 	$d=date ("d");
 	$m=date ("m");
 	$y=date ("Y");
-<<<<<<< HEAD
+
 	$dmt="Current date is ".$d." , month ".$m." & year ".$y.". Here's a random number : ".rand(100,1000);*/
-	
-	
+
+
 	$parts=msgparse($message);
 	foreach ($parts as $dmt)
     {
@@ -195,7 +195,7 @@ function send(){
 mysql_close($con);
 
 
-=======
+
 	$dmt="Current date is ".$d." , month ".$m." & year ".$y.". Here's a random number : ".rand(100,1000);
 	/*$status = sendFullonSMS ( '9968371143' , '16537' , $sender  , $dmt);
 
@@ -210,16 +210,14 @@ mysql_close($con);
 
 
 $text=check_service();
->>>>>>> 3a731cf91164ac958454e2fec012ed9b3037417e
+
 
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	init();
 }
 
-<<<<<<< HEAD
+
 ?>
 
 
-=======
-?>
->>>>>>> 3a731cf91164ac958454e2fec012ed9b3037417e
+
