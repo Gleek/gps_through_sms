@@ -67,7 +67,10 @@ function send($text){
 
 	if(strlen($_REQUEST['cid'])==10) $sender= $_REQUEST['cid'];
 	else if(strlen($_REQUEST['cid'])>10) $sender= substr($_REQUEST['cid'], -10);
-	else echo "<br/>Error:Length of mobile no less than 10<br/>";
+	else {
+		echo "<br/>Error:Length of mobile no less than 10<br/>";
+		die();
+	}
 
 	$d=date ("d");
 	$m=date ("m");
