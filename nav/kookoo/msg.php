@@ -104,10 +104,6 @@ function break_search(){
 	//$message= $_REQUEST['message'];
  	$message="nav from: jamia millia islamia to: noida";
 	$query="";
-
-
-if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
-
     $main1=explode("search:",$message);
     $query= $main[1];
 
@@ -151,11 +147,8 @@ function send(){
 
 	if(strlen($_REQUEST['cid'])==10) $sender= $_REQUEST['cid'];
 	else if(strlen($_REQUEST['cid'])>10) $sender= substr($_REQUEST['cid'], -10);
-
-	else echo "<br/>Error:Length of mobile no less than 10<br/>";
-
 	else {
-		echo "<br/>Error:Length of mobile no less than 10<br/>";
+		echo "<br/>Error:Length of mobile no is less than 10<br/>";
 		die();
 	}
 
