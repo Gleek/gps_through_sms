@@ -5,18 +5,24 @@ include('../../sms/fullonsms-api.php');
 //phpinfo();
 $con=$dbhandle;
 
- function break_msg($message){
+function check_service(){
+	$message="nav from: jamia millia islamia to: noida";
+	if(substr($message,0,3)=="nav") break_nav();
+	else if(substr($message,0,6)=="search") break_search();
+}
+
+function break_nav(){
+	//$message= $_REQUEST['message'];
  	$message="nav from: jamia millia islamia to: noida";
 	$source="";
     $destination="";
-    if(substr($message,0,3)=="nav")
-    {
-        $main1=explode("from:",$message);
-        $main2=explode("to:",$main1[1]);
-        //print_r($main1);
-        $source=urlencode($main2[0]);
-        $destination=urlencode($main2[1]);
-    }
+
+    $main1=explode("from:",$message);
+    $main2=explode("to:",$main1[1]);
+    //print_r($main1);
+    $source=urlencode($main2[0]);
+    $destination=urlencode($main2[1]);
+
 
     $url="http://engineerinme.com/hammad/peerhack/replymsg.php?source=".$source."&destination=".$destination;
     //echo "url is ".$url;
@@ -30,13 +36,16 @@ $con=$dbhandle;
     return $text;
 }
 
-$text=break_msg("abc");
+function break_search(){
 
-if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
-	init();
+	//$message= $_REQUEST['message'];
+ 	$message="nav from: jamia millia islamia to: noida";
+	$query="";
+
+    $main1=explode("search:",$message);
+    $query= $main[1];
 
 }
-
 
 function init(){
 	$message=$_REQUEST['message'];
@@ -70,10 +79,10 @@ function send(){
 }
 
 
+$text=break_nav();
 
-//mysql_close($con);
-
-
+if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms")
+	init();
 
 
 ?>
