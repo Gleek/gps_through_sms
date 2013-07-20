@@ -64,7 +64,7 @@ function init(){
 }
 
 function break_text(){
-	if(srlen($text)<=160) return array($text);
+	if(strlen($text)<=160) return array($text);
 
 
 }
