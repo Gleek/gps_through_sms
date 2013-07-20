@@ -14,7 +14,7 @@ $con=$dbhandle;
         echo "entered";
         $main1=explode("from:",$message);
         $main2=explode("to:",$main1);
-        print_r($main);
+        //print_r($main1);
         $source=$main2[0];
         $destination=$main2[1];
     }
