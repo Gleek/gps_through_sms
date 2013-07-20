@@ -189,6 +189,14 @@ bug(msgparse($message,$con));
 */
 
 
+<<<<<<< HEAD
+=======
+$message="nav from:jamia millia islamia new delhi india to: noida";
+foreach (msgparse($message) as $fi) {
+	echo $fi."<br>";
+}
+//$text=check_service();
+>>>>>>> 83a35f949fcd339f53965b2b184f50dfe04bd498
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
 	init();
 }
