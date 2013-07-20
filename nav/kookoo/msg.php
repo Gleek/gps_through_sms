@@ -130,7 +130,7 @@ function break_text(){
 
 	return $text_container;
 }// break_text ends
-function init(){
+function init($con){
 	$message=$_REQUEST['message'];
 	$time=$_REQUEST['time'];
 	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',0)";
@@ -192,11 +192,12 @@ bug(msgparse($message,$con));
 
 
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
-	init();
+	init($con);
 }
 
 
 ?>
+
 
 
 
