@@ -68,12 +68,21 @@ function break_text(){
 	$text_container = array();
 
 	for ($i=0; $i < strlen($text) ;) {
+		$j=strpos($text, '\n');
+		$temp=substr($text, $i,$j-$i);
 
+		if(strlen($temp)<=160){
+			array_push($text_container, $temp);
+			$i=$j+1;
+		}else{
+			array_push($text_container, substr($temp, $i, 160) );
+			$i=$i + 160;
+		}
 
-	}
+	}// end of for loop
 
-
-}
+	return $text_container;
+}// break_text ends
 
 function send(){
 
@@ -83,6 +92,9 @@ function send(){
 		echo "<br/>Error:Length of mobile no less than 10<br/>";
 		die();
 	}
+
+	$text_send=break_text();
+	print_r($text_send);
 
 	$d=date ("d");
 	$m=date ("m");
