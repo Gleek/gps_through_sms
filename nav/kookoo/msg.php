@@ -51,19 +51,25 @@ function break_search(){
     return $text;
 }
 
-function init($text){
+function init(){
 	$message=$_REQUEST['message'];
 	$time=$_REQUEST['time'];
 	$sql="INSERT INTO `inbound_msgs` (`sender`,`message`, `time`, `flag`) VALUES ('".$_REQUEST['cid']."','".$message."','".$time."',1)";
 	//echo $sql;
-	if(mysql_query($sql, $con)==true) send($text);
+	if(mysql_query($sql, $con)==true) send();
 	else{
 		echo "Error in init()";
 		die();
 	}
 }
 
-function send($text){
+function break_text(){
+	if(srlen($text)<=160) return array($text);
+
+
+}
+
+function send(){
 
 	if(strlen($_REQUEST['cid'])==10) $sender= $_REQUEST['cid'];
 	else if(strlen($_REQUEST['cid'])>10) $sender= substr($_REQUEST['cid'], -10);
@@ -91,7 +97,7 @@ function send($text){
 $text=check_service();
 
 if(isset($_REQUEST['event']) && $_REQUEST['event']=="NewSms"){
-	init($text);
+	init();
 }
 
 ?>
