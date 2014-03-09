@@ -14,9 +14,9 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    $username   =   "9968371143";
-    $password   =   "hack123";
-    $receiver   =   "9968371143";
+    $username   =   "phone_num";
+    $password   =   "passwo";
+    $receiver   =   "recv";
     $message    =   "Hello World";
 
     if (empty($username))

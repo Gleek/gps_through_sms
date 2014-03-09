@@ -59,9 +59,9 @@ foreach ($jsonIterator as $key => $val)
 
 
 
-$username = "thinkdif";
-$password = "kgggdkp1992";
-$hostname = "67.23.226.179";
+$username = "the user name";
+$password = "your password";
+$hostname = "your host name";
 
 $dbhandle = mysql_connect($hostname, $username, $password)
   or die("Unable to connect to MySQL");

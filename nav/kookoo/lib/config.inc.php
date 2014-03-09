@@ -2,9 +2,9 @@
 #set_time_limit(0);
 error_reporting(E_ALL  & ~E_NOTICE & ~E_DEPRECATED);
 
-$username = "thinkdif";
-$password = "kgggdkp1992";
-$hostname = "67.23.226.179";
+$username = "dbusrenamee";
+$password = "dbpass";
+$hostname = "hostname";
 
 //connection to the database
 $dbhandle = mysql_connect($hostname, $username, $password)
