@@ -5,12 +5,12 @@ App made in 48 hours in peer-hack hackathon
 
 What was used??
 ===============
- -Google maps Api
- -kookoo api
- -knowrality api
- -just dial (scraped :-P)
- -fullonsms (hacked :-P)
- -simple-html-dom-parser
+ - Google maps Api
+ - kookoo api
+ - knowrality api
+ - just dial (scraped :-P)
+ - fullonsms (hacked :-P)
+ - simple-html-dom-parser
 
 Usage
 =====
@@ -18,7 +18,7 @@ Usage
 
 `nav from:lakshmi nagar new delhi india to:lajpat nagar new delhi india`
 
--Shop finding
+- Shop finding
 
 `loc in:lajpat type:fabric`
 
